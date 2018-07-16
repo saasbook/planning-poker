@@ -30,6 +30,7 @@ class User
       rescue Exception => e
         puts "Something went wrong"
         puts e
+        return
       end
 
       salt = salted(
