@@ -386,6 +386,7 @@ DEPENDENCIES
   forgery
   jbuilder (~> 2.0)
   jquery-rails
+  json
   mocha
   mongoid!
   newrelic_rpm
@@ -394,6 +395,7 @@ DEPENDENCIES
   rails (= 4.2.5.1)
   rails_12factor
   responders (~> 2.0)
+  rest-client
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

@@ -19,7 +19,6 @@ class User
       user = find_by(
         username: params[:username]
       ) # need to get the salt
-
       user && user.authenticated?(params[:password]) ? user : create(params)
     end
 
