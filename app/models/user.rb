@@ -19,16 +19,18 @@ class User
       user = find_by(
         username: params[:username]
       ) # need to get the salt
-
       user && user.authenticated?(params[:password]) ? user : create(params)
     end
 
     def create(params)
       # Set Pivotal Tracker token
-      token = PivotalTracker::Client.token(
-        params[:username],
-        params[:password]
-      )
+      begin
+        api_response = RestClient::Request.execute(method: :get, url: "https://www.pivotaltracker.com/services/v5/me", user: params[:username], password: params[:password])
+        token = JSON.parse(api_response)["api_token"] 
+      rescue Exception => e
+        puts "Something went wrong"
+        puts e
+      end
 
       salt = salted(
         params[:username]

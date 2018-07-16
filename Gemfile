@@ -4,7 +4,8 @@ gem 'rails', '4.2.5.1'
 gem 'sqlite3'
 gem 'thin'
 gem 'faye'
-
+gem 'json'
+gem 'rest-client'
 # Heroku and New Relic
 gem 'rails_12factor'
 gem 'newrelic_rpm'
