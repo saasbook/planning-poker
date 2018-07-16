@@ -32,12 +32,13 @@ gem 'tracker_api'
 gem 'rspec-rails', group: [:test, :development]
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'forgery'
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'rack_session_access'
+  gem 'simplecov', require: false
   gem 'mocha', require: false
   gem 'zeus', require: false
 end
@@ -50,7 +51,6 @@ group :development do
   gem 'capistrano-rails', '~> 1.1', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-rvm', '~> 0.1', require: false
-  gem 'codeclimate-test-reporter', require: false
 end
 
 gem 'jbuilder', '~> 2.0'
