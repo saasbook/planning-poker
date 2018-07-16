@@ -1,2 +1,2 @@
 # Enable SSL support
-PivotalTracker::Client.use_ssl = true
+# PivotalTracker::Client.use_ssl = true

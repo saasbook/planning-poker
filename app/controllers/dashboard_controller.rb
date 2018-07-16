@@ -3,12 +3,12 @@ class DashboardController < ApplicationController
   respond_to    :js
 
   def index
-    @projects = PivotalTracker::Project.all
+    @projects = @client.projects
   end
 
   # Ajax
   def project
-    @project = PivotalTracker::Project.find(params[:id].to_i)
+    @project = @client.project(params[:id].to_i)
 
     respond_with @project do |format|
       format.js { render 'dashboard/ajax/project' }
@@ -65,6 +65,7 @@ class DashboardController < ApplicationController
   end
 
   def update
+    params[:client] = @client
     @resource = Story.update(params)
 
     respond_with @resource do |format|

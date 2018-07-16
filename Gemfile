@@ -26,6 +26,7 @@ gem 'pivotal-tracker'
 gem 'backtop'
 gem 'mongoid', github: 'mongoid'
 gem 'bson_ext'
+gem 'tracker_api'
 
 gem 'rspec-rails', group: [:test, :development]
 

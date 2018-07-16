@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
 
   # Meant to be used as before_action in any controllers that are not publicly accessible
   def require_authentication
-    redirect_to login_path, alert: t('flashes.sessions.expired') unless user_signed_in?
+    redirect_to login_path, alert: t('flashes.sessions.expired') and return unless user_signed_in?
+    @client = TrackerApi::Client.new(token: current_user['token'])
   end
 
   def reset_token

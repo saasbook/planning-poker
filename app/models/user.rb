@@ -25,10 +25,16 @@ class User
 
     def create(params)
       # Set Pivotal Tracker token
-      token = PivotalTracker::Client.token(
-        params[:username],
-        params[:password]
-      )
+      # token = PivotalTracker::Client.token
+      #   params[:username],
+      #   params[:password]
+      # )
+      api_response = RestClient::Request.execute(
+          method: :get,
+          url: "https://www.pivotaltracker.com/services/v5/me",
+          user: params[:username],
+          password: params[:password])
+      token = JSON.parse(api_response)["api_token"]
 
       salt = salted(
         params[:username]
