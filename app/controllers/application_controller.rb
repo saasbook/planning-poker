@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   def record_activity
     activity_param = {
         activity_type: "#{params[:controller]}\##{params[:action]}",
-        user_id: current_user.nil? ? nil : current_user[:id],
+        user_id: current_user.nil? ? nil : current_user['id'].to_i,
     }
 
     if params[:action].eql? 'project'
@@ -44,10 +44,26 @@ class ApplicationController < ActionController::Base
     end
 
     if @resource
-      activity_param.update({
-        story_id: @resource.key?(:story_id) ?  @resource[:story_id] : @resource[:id],
-        activity_data: @resource.to_json
-      })
+      if params[:action].eql? 'update'
+        activity_param.update(
+            {
+                story_id: @resource.id,
+                activity_data: {
+                    story_id: @resource.id,
+                    name: @resource.name,
+                    description: @resource.description,
+                    estimate: @resource.estimate,
+                }
+            }
+        )
+      else
+        activity_param.update(
+            {
+                story_id: @resource[:story_id],
+                activity_data: @resource.to_json
+            }
+        )
+      end
     end
     Activity.create activity_param
   end

@@ -1,4 +1,5 @@
 class ActivitiesController < ApplicationController
+  layout false
   before_action :set_activity, only: [:show, :destroy]
 
   # GET /activities
@@ -10,6 +11,11 @@ class ActivitiesController < ApplicationController
   # GET /activities/1
   # GET /activities/1.json
   def show
+  end
+
+  # GET /activities/stories
+  def story_metric
+    @stories = Vote.stories
   end
 
   # POST /activities.json

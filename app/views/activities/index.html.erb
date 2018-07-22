@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Time</th>
+    <th>User</th>
+    <th>Activity</th>
+    <th>Story</th>
+    <th>More</th>
+  </tr>
+  <%- @activities.each do |activity| %>
+    <tr>
+      <td><%= activity.created_at%></td>
+      <td><%= activity.user.nil? ? nil : activity.user.username %></td>
+      <td><%=	activity.activity_type %></td>
+      <td><%= activity.story_id %></td>
+      <td><button>More</button></td>
+    </tr>
+  <% end %>
+</table>
