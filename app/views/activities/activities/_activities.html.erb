@@ -1,0 +1,28 @@
+<%- @activities.each do |activity| %>
+  <div id="story-<%= activity.id %>" class="story clearfix story-unstarted story-feature %>">
+    <div class="story-overview clearfix">
+<!--      <div class="pull-left story-icons">-->
+        <%#= link_to detail_path(story.id, 'expand', encoded_user), id: "expand-activity-#{activity.id}", remote: true do %>
+<!--          <span class="fa fa-play story-icon expand"></span>-->
+        <%# end %>
+<!--        <span class="<%#= icon(story) %> story-icon"></span>-->
+<!--        <span class="fa story-icon">-->
+          <%#= raw estimation(story) %>
+<!--        </span>-->
+<!--      </div>-->
+      <div class="pull-left story-description">
+        <%= activity.activity_type %>
+        <%= activity.user %>
+        <%= activity.story_id %>
+        <%= activity.created_at %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!--<tr>-->
+<!--  <td><%#= activity.created_at%></td>-->
+<!--  <td><%#= activity.user.nil? ? nil : activity.user.username %></td>-->
+<!--  <td><%#=	activity.activity_type %></td>-->
+<!--  <td><%#= activity.story_id %></td>-->
+<!--  <td><button>More</button></td>-->
+<!--</tr>-->

@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
-  layout false
   before_action :set_activity, only: [:show, :destroy]
+  before_action :set_flag
 
   # GET /activities
   # GET /activities.json
@@ -49,5 +49,9 @@ class ActivitiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
       params.require(:activity).permit(:user_id, :vote_id, :project_id, :story_id, :activity_type, :activity_data)
+    end
+
+    def set_flag
+      @analytics = true
     end
 end

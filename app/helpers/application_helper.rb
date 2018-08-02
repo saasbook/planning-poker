@@ -1,7 +1,8 @@
 module ApplicationHelper
 
   def layout_class
-    user_signed_in? ? 'authenticated' : 'unauthenticated'
+    return 'unauthenticated' unless user_signed_in?
+    @analytics ? 'analytics' : 'authenticated'
   end
 
   def publisher_client_path
