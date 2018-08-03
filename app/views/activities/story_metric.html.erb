@@ -1,16 +1,5 @@
-<table>
-  <tr>
-    <th>Story ID</th>
-    <th>Discussion Time</th>
-    <th>Vote Variance</th>
-    <th>Updated by</th>
-  </tr>
-  <%-	 @stories.each do |sid| %>
-    <tr>
-      <td><%=	 sid %></td>
-      <td><%=  Activity.discuss_time(sid).round(2) %></td>
-      <td><%=	 Activity.vote_variance(sid).round(2) %></td>
-      <td><%=	 Activity.updated_by(sid) %></td>
-    </tr>
-  <% end %>
-</table>
+<div id="stories-list" class="stories col-md-12">
+  <div id="stories">
+    <%= render 'activities/metrics/story_metrics', stories: @stories %>
+  </div>
+</div>

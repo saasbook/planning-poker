@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   class << self
     def discuss_time(story_id)
       activities = activities_for_story(story_id)
-      Activity.voting_start_time(activities) - Activity.discussion_start_time(activities)
+      (Activity.voting_start_time(activities) - Activity.discussion_start_time(activities)) / 60
     end
 
     def vote_variance(story_id)
