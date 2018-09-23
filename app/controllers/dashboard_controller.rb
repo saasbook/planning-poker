@@ -39,6 +39,7 @@ class DashboardController < ApplicationController
   $calendar_id = "berkeley.edu_9f5b4e17egep4l9e0birqr8pu4@group.calendar.google.com"
 
   def index
+    session[:analytics] = false
     @projects = @client.projects
     if session[:last_project] && @projects && !@projects.empty?
       curr_proj = @client.project(session[:last_project])
@@ -141,7 +142,12 @@ class DashboardController < ApplicationController
 
   def analytics
     # TODO: Chang this to analytics path for the discussion
-    redirect_to root_path
+    session[:analytics] = true
+    @projects = @client.projects
+    if session[:last_project] && @projects && !@projects.empty?
+      curr_proj = @client.project(session[:last_project])
+      @projects.unshift @projects.delete(curr_proj)
+    end
   end
 
 

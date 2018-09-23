@@ -11,7 +11,11 @@
         <%= t('planning') %><span><%= t('poker') %></span>
       </h1>
       <div id="header-links" class="text-right col-md-2">
-        <%= link_to "Analytics", analytics_path(@projects.first.id), class: "white header-links" %>
+        <% if analytics %>
+          <%= link_to "Story View", root_path, class: "white header-links" %>
+        <% else %>
+          <%= link_to "Analytics", analytics_path(@projects.first.id), class: "white header-links" %>
+        <% end %>
         &emsp;&emsp;
         <%= link_to logout_path, method: :delete, class: 'white header-links' do %>
           <i class="fa fa-sign-out"></i> <%= t('signout') %>
