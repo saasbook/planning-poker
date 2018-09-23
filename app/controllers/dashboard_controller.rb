@@ -139,6 +139,11 @@ class DashboardController < ApplicationController
     redirect_to root_path
   end
 
+  def analytics
+    # TODO: Chang this to analytics path for the discussion
+    redirect_to root_path
+  end
+
 
 protected
 
