@@ -7,9 +7,9 @@
             <th>Metric 2</th>
         </tr>
     </thead>
-    <tbody class="analytics_table story">
+    <tbody class="analytics_table story_rows">
         <% project.stories.each do |story| %>
-            <tr>
+            <tr class="analytics_table story story-<%= estimation_class(story) %>" style="display:<%= get_initial_display_table(story) %>">
                 <td><%= story.id %></td>
                 <td><%= story.current_state %></td>
                 <td><%= story.name %></td>

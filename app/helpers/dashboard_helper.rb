@@ -117,4 +117,12 @@ module DashboardHelper
     end
   end
 
+  def get_initial_display_table(row)
+    if estimation_class(row) == "unestimated"
+      return ""
+    else
+      return "none"
+    end
+  end
+
 end
