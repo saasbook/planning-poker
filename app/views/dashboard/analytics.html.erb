@@ -1,8 +1,5 @@
-<div id="stories-list" class="stories col-md-8">
-  <h2 class="titles">
-    <%= t('story').pluralize %>
-  </h2>
-  <div id="stories">
-    <%= render 'dashboard/stories/list', project: @projects.first unless @projects.blank? %>
+<div id="analytics-table" class="analytics_table col-md-12">
+  <div id="analytics">
+    <%= render 'dashboard/stories/analytics', project: @projects.first unless @projects.blank? %>
   </div>
 </div>
