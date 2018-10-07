@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     @client = TrackerApi::Client.new(token: user_token)
   end
 
-  helper_method :user_signed_in?, :current_user
+  helper_method :user_signed_in?, :current_user, :is_analytics?
 
   def current_user
     @current_user ||= session[:user]
@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
 
   def user_signed_in?
     !!session[:user]
+  end
+
+  def is_analytics?
+    !!session[:analytics]
   end
 
   def rescue_steps(message)

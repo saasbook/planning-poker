@@ -5,6 +5,10 @@ module ApplicationHelper
     @analytics ? 'analytics' : 'authenticated'
   end
 
+  def is_analytics
+    is_analytics?
+  end
+
   def publisher_client_path
     "//#{publisher_domain}/faye/client.js" unless Rails.env.test?
   end

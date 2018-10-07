@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     post 'select-vote', action: :select, as: :select
     post 'update-story', action: :update, as: :update
     get '/makehangout', action: :get_hangouts_link
+    get 'discussion/:story_id', action: :discussion, as: :discussion
+    get 'analytics/:project_id', action: :analytics, as: :analytics
   end
 
   resources :activities, only: [:index, :show, :create, :destroy] do

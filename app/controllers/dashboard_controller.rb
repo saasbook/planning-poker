@@ -39,6 +39,7 @@ class DashboardController < ApplicationController
   $calendar_id = "berkeley.edu_9f5b4e17egep4l9e0birqr8pu4@group.calendar.google.com"
 
   def index
+    session[:analytics] = false
     @projects = @client.projects
     if session[:last_project] && @projects && !@projects.empty?
       curr_proj = @client.project(session[:last_project])
@@ -104,6 +105,16 @@ class DashboardController < ApplicationController
     end
   end
 
+  def discussion
+    @resource = {
+      story_id: params[:story_id]
+    }
+
+    respond_with @resource do |format|
+      format.js { render 'dashboard/ajax/discussion' }
+    end
+  end
+
   def update
     params[:client] = @client
     @resource = Story.update(params)
@@ -128,6 +139,17 @@ class DashboardController < ApplicationController
     Project.create_hangout(params[:project_id])
     redirect_to root_path
   end
+
+  def analytics
+    # TODO: Chang this to analytics path for the discussion
+    session[:analytics] = true
+    @projects = @client.projects
+    if session[:last_project] && @projects && !@projects.empty?
+      curr_proj = @client.project(session[:last_project])
+      @projects.unshift @projects.delete(curr_proj)
+    end
+  end
+
 
 protected
 
