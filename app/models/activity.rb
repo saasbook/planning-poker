@@ -32,7 +32,7 @@ class Activity < ActiveRecord::Base
     def discussion_start_time(activities)
       relevant_activity = activities.where(activity_type: 'dashboard#detail').last
       if relevant_activity
-        relevant_activity.last.created_at
+        relevant_activity.created_at
       else
         0
       end
@@ -41,7 +41,7 @@ class Activity < ActiveRecord::Base
     def voting_start_time(activities)
       relevant_activity = activities.where(activity_type: 'dashboard#discussion').last
       if relevant_activity
-        relevant_activity.last.created_at
+        relevant_activity.created_at
       else
         0
       end
