@@ -3,8 +3,9 @@
         <tr>
             <!-- TODO: Insert list of metrics here -->
             <th>Story ID</th>
-            <th>Metric 1</th>
-            <th>Metric 2</th>
+            <th>Story State</th>
+            <th>Discussion Time</th>
+            <th>Vote Variance</th>
         </tr>
     </thead>
     <tbody class="analytics_table story_rows">
@@ -12,7 +13,8 @@
             <tr class="analytics_table story story-<%= estimation_class(story) %>" style="display:<%= get_initial_display_table(story) %>">
                 <td><%= story.id %></td>
                 <td><%= story.current_state %></td>
-                <td><%= story.name %></td>
+                <td><%= Activity.discuss_time(story.id) %></td>
+                <td><%= Activity.vote_variance(story.id) %></td>
             </tr>
         <% end %>
     </tbody>

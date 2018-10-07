@@ -60,6 +60,15 @@ class ApplicationController < ActionController::Base
                 }
             }
         )
+      elsif params[:action].eql? 'discussion'
+        activity_param.update(
+            {
+                story_id: @resource[:story_id],
+                activity_data: {
+                    story_id: @resource[:story_id],
+                }
+            }
+        )
       else
         activity_param.update(
             {

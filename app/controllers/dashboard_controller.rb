@@ -141,7 +141,6 @@ class DashboardController < ApplicationController
   end
 
   def analytics
-    # TODO: Chang this to analytics path for the discussion
     session[:analytics] = true
     @projects = @client.projects
     if session[:last_project] && @projects && !@projects.empty?

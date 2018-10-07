@@ -13,27 +13,38 @@ class Activity < ActiveRecord::Base
       votes = activities.map do |act|
         JSON.parse(act.activity_data)['vote'].to_f
       end
-      sum = votes.inject(0.0) { |tsum, vt| tsum + vt }
+      sum = votes.sum
       mean = sum / votes.length.to_f
       variance = votes.inject(0.0) { |tsum, vt| tsum + (vt - mean)**2 }
-      variance = variance / (votes.length - 1).to_f
+      variance = variance / (votes.length).to_f
       Math.sqrt variance
     end
 
     def updated_by(story_id)
-      Activity.where(activity_type: 'dashboard#update', story_id: story_id).last.user.username
+      user_id = Activity.where(activity_type: 'dashboard#update', story_id: story_id).last.user_id
+      User.where(id: user_id).first.username
     end
 
     def activities_for_story(story_id)
-       Activity.where(story_id: story_id)
+      Activity.order(:created_at).where(story_id: story_id)
     end
 
     def discussion_start_time(activities)
-      activities.where(activity_type: 'dashboard#detail').last.created_at
+      relevant_activity = activities.where(activity_type: 'dashboard#detail').last
+      if relevant_activity
+        relevant_activity.last.created_at
+      else
+        0
+      end
     end
 
     def voting_start_time(activities)
-      activities.where(activity_type: 'dashboard#vote').first.created_at
+      relevant_activity = activities.where(activity_type: 'dashboard#discussion').last
+      if relevant_activity
+        relevant_activity.last.created_at
+      else
+        0
+      end
     end
   end
 

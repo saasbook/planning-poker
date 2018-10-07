@@ -8,13 +8,19 @@
           <i class="fa fa-circle-o fa-stack-2x"></i>
           <i class="fa fa-heart fa-stack-1x"></i>
         </span>
-        <%= t('planning') %><span><%= t('poker') %></span>
+        <% if analytics %>
+          <%= t('planning') %><span><%= t('poker') %></span>Analytics
+        <% else %>
+          <%= t('planning') %><span><%= t('poker') %></span>
+        <% end %>
       </h1>
       <div id="header-links" class="text-right col-md-2">
         <% if analytics %>
           <%= link_to "Story View", root_path, class: "white header-links" %>
         <% else %>
-          <%= link_to "Analytics", analytics_path(@projects.first.id), class: "white header-links" %>
+          <% if @projects.first %>
+            <%= link_to "Analytics", analytics_path(@projects.first.id), class: "white header-links" %>
+          <% end %>
         <% end %>
         &emsp;&emsp;
         <%= link_to logout_path, method: :delete, class: 'white header-links' do %>
