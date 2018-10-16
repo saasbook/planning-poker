@@ -143,8 +143,8 @@ class DashboardController < ApplicationController
   def analytics
     session[:analytics] = true
     @projects = @client.projects
-    if session[:last_project] && @projects && !@projects.empty?
-      curr_proj = @client.project(session[:last_project])
+    if params[:project_id] && @projects && !@projects.empty?
+      curr_proj = @client.project(params[:project_id])
       @projects.unshift @projects.delete(curr_proj)
     end
   end
