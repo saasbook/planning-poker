@@ -138,4 +138,15 @@ module DashboardHelper
     end
   end
 
+  def sorted_analytics_display(stories)
+    sessions = stories.collect{|s| session_id_for_story(s)}
+    zipped = stories.zip(sessions)
+    puts zipped.sort_by(&:last).reverse
+    zipped.sort_by(&:last).reverse.collect(&:first)
+  end
+
+  def session_id_for_story(story)
+    Session.where(story_id: story.id).first.session_id
+  end
+
 end

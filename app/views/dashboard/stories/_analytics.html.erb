@@ -9,8 +9,8 @@
         </tr>
     </thead>
     <tbody class="stories story_rows">
-        <% project.stories.each do |story| %>
-            <tr class="analytics_table story session-<%= session_class(story) %>" style="display:<%= get_initial_display_table(story) %>">
+        <% sorted_analytics_display(project.stories).each do |story, session_id| %>
+            <tr class="analytics_table story session-<%= session_class(story) %>">
                 <td><%= story.id %></td>
                 <td><%= story.current_state %></td>
                 <td><%= Activity.discuss_time(story.id) %></td>

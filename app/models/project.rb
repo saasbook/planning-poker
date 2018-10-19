@@ -89,7 +89,6 @@ class Project < ActiveRecord::Base
           -1
         end
       end
-      #TODO: Reassign all stories that don't have times
       session_id = 0
       curr_story = Session.where(story_id: all_stories[0].id).first
       if curr_story
@@ -103,7 +102,6 @@ class Project < ActiveRecord::Base
       outliers = []
       for story in all_stories.drop(1)
         if deltas[i] == -1
-          # raise "BIGEXCEPTION"
           session_id = -2
         elsif deltas[i] > 60*60*3
           if num_elems_in_session < 3

@@ -44,17 +44,20 @@
     </div>
 
   <% else %>
-
-    <div id="sub-menu" class="row">
-      <ul>
-        <li id="filter-unestimated" class="selected">
-          <%= t('unestimated').upcase %>
-        </li>
-        <li id="filter-all">
-          <%= t('all').upcase %>
-        </li>
-      </ul>
-    </div>
+    
+      <div id="sub-menu" class="row">
+        <ul>
+          <% if not session[:analytics] %>
+            <li id="filter-unestimated" class="selected">
+              <%= t('unestimated').upcase %>
+            </li>
+            <li id="filter-all">
+              <%= t('all').upcase %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    
 
     <div id="content" class="col-md-12">
       <%= yield %>
