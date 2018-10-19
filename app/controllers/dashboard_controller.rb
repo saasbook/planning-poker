@@ -147,10 +147,21 @@ class DashboardController < ApplicationController
       curr_proj = @client.project(params[:project_id])
       @projects.unshift @projects.delete(curr_proj)
     end
+    if not is_sessionized(@projects.first)
+      Project.classify_sessions(@projects.first)
+    end
   end
 
 
 protected
+
+  def is_sessionized(project)
+    if project.stories.length == Session.where(story_id: project.stories.map(&:id)).length
+      true
+    else
+      false
+    end
+  end
 
   def decode_user
     params[:user] = Base64.strict_decode64(params[:user]) if params and params[:user]

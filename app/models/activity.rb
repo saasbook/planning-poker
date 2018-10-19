@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
 
   class << self
     def discuss_time(story_id)
-      activities = activities_for_story(story_id)
+      activities = Activity.activities_for_story(story_id)
       vote_start = Activity.voting_start_time(activities) 
       discussion_start = Activity.discussion_start_time(activities)
       if (vote_start == 0 and discussion_start != 0) or (vote_start != 0 and discussion_start == 0)

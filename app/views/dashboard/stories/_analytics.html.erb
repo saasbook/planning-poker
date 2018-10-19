@@ -8,9 +8,9 @@
             <th>Vote Variance</th>
         </tr>
     </thead>
-    <tbody class="analytics_table story_rows">
+    <tbody class="stories story_rows">
         <% project.stories.each do |story| %>
-            <tr class="analytics_table story story-<%= estimation_class(story) %>" style="display:<%= get_initial_display_table(story) %>">
+            <tr class="analytics_table story session-<%= session_class(story) %>" style="display:<%= get_initial_display_table(story) %>">
                 <td><%= story.id %></td>
                 <td><%= story.current_state %></td>
                 <td><%= Activity.discuss_time(story.id) %></td>

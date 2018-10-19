@@ -125,4 +125,17 @@ module DashboardHelper
     end
   end
 
+  def session_class(story)
+    session_id = Session.where(story_id: story.id).first.session_id
+    if session_id == -1
+      "outlier"
+    elsif session_id == -2
+      "not_discussed"
+    elsif session_id % 2 == 0
+      "even"
+    else
+      "odd"
+    end
+  end
+
 end
