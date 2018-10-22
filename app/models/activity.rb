@@ -6,7 +6,7 @@ class Activity < ActiveRecord::Base
     def discuss_time(story_id)
       activities = Activity.activities_for_story(story_id)
       vote_start = Activity.voting_start_time(activities) 
-      discussion_start = Activity.discussion_start_time(activities)
+      discussion_start = Activity.discussion_start_time(activities, vote_start)
       if (vote_start == 0 and discussion_start != 0) or (vote_start != 0 and discussion_start == 0)
         -1
       else   
@@ -35,8 +35,8 @@ class Activity < ActiveRecord::Base
       Activity.order(:created_at).where(story_id: story_id)
     end
 
-    def discussion_start_time(activities)
-      relevant_activity = activities.where(activity_type: 'dashboard#detail').last
+    def discussion_start_time(activities, end_range)
+      relevant_activity = activities.where("activity_type='dashboard#detail' AND created_at <= ?", end_range).last
       if relevant_activity
         relevant_activity.created_at
       else
