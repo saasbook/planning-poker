@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def record_activity
+    # byebug
     activity_param = {
         activity_type: "#{params[:controller]}\##{params[:action]}",
         user_id: current_user.nil? ? nil : current_user['id'].to_i,
@@ -61,6 +62,7 @@ class ApplicationController < ActionController::Base
             }
         )
       elsif params[:action].eql? 'discussion'
+        puts "Got here!!!"
         activity_param.update(
             {
                 story_id: @resource[:story_id],
@@ -69,6 +71,7 @@ class ApplicationController < ActionController::Base
                 }
             }
         )
+        Session.where(story_id: @resource[:story_id].to_i).delete_all
       else
         activity_param.update(
             {

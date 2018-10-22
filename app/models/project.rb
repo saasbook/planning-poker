@@ -101,14 +101,15 @@ class Project < ActiveRecord::Base
       i = 0
       outliers = []
       for story in all_stories.drop(1)
+        byebug
         if deltas[i] == -1
           session_id = -2
         elsif deltas[i] > 60*60*3
           if num_elems_in_session < 3
             outliers << session_id
-            session_id += 1
-            num_elems_in_session = 0
           end
+          session_id += 1
+          num_elems_in_session = 0
         end
         curr_story = Session.where(story_id: story.id).first
         if curr_story
@@ -120,8 +121,8 @@ class Project < ActiveRecord::Base
         num_elems_in_session += 1
         i += 1
       end
-      puts Session.all.length
-      puts all_stories.length
+      # puts Session.all.length
+      # puts all_stories.length
       for session_id in outliers
         Session.where(session_id: session_id).update_all(:session_id => -1)
       end
