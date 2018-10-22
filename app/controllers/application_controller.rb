@@ -38,7 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def record_activity
-    # byebug
     activity_param = {
         activity_type: "#{params[:controller]}\##{params[:action]}",
         user_id: current_user.nil? ? nil : current_user['id'].to_i,

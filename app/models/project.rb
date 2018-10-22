@@ -101,7 +101,6 @@ class Project < ActiveRecord::Base
       i = 0
       outliers = []
       for story in all_stories.drop(1)
-        byebug
         if deltas[i] == -1
           session_id = -2
         elsif deltas[i] > 60*60*3
