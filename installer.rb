@@ -5,7 +5,7 @@ if not Dir.exists?('.git_cs169')
     FileUtils.cp_r '.git', '.git_cs169'
 end
 
-# If no related file in config/initializers, then create that 
+# If no related file in config/initializers, then create that file
 
 
 # Set right remote
