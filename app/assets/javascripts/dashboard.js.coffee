@@ -23,7 +23,5 @@ selectCard = ->
 window.filterState = filterState
 window.selectCard  = selectCard
 
-$(document).on 'turbolinks:load', ->
-  filterStories()
-$(document).on 'turbolinks:load', ->
-  selectCard()
+$(document).ready(filterStories)
+$(document).ready(selectCard)
