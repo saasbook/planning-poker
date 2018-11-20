@@ -31,7 +31,7 @@ module DashboardHelper
   end
 
   def estimation_class(story)
-    if type_chore?(story) or type_release?(story)
+    if type_chore?(story)
       'unestimateable'
     else
       (story.estimate and story.estimate.to_i >= 0) ? 'estimated' : 'unestimated'
@@ -115,6 +115,38 @@ module DashboardHelper
     else
       return "none"
     end
+  end
+
+  def get_initial_display_table(row)
+    if estimation_class(row) == "unestimated"
+      return ""
+    else
+      return "none"
+    end
+  end
+
+  def session_class(story)
+    session_id = Session.where(story_id: story.id).first.session_id
+    if session_id == -1
+      "outlier"
+    elsif session_id == -2
+      "not_discussed"
+    elsif session_id % 2 == 0
+      "even"
+    else
+      "odd"
+    end
+  end
+
+  def sorted_analytics_display(stories)
+    sessions = stories.collect{|s| session_id_for_story(s)}
+    zipped = stories.zip(sessions)
+    puts zipped.sort_by(&:last).reverse
+    zipped.sort_by(&:last).reverse.collect(&:first)
+  end
+
+  def session_id_for_story(story)
+    Session.where(story_id: story.id).first.session_id
   end
 
 end
